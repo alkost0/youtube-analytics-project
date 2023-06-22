@@ -7,7 +7,7 @@ class Channel:
 
     def __init__(self, channel_id: str) -> None:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API"""
-        self.channel_id = 'UCkbFiBwMYMXAqifXF4xo5Uw' #minimalists
+        self.__channel_id = channel_id
         channel_info = self.get_service().channels().list(id=self.__channel_id, part='snippet,statistics').execute()
         self.title = channel_info["items"][0]["snippet"]["title"]
         self.description = channel_info["items"][0]["snippet"]["description"]
@@ -20,7 +20,7 @@ class Channel:
         """Выводит в консоль информацию о канале"""
         api_key: str = os.getenv('API_KEY')
         youtube = build('youtube', 'v3', developerKey=api_key)
-        channel = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
+        channel = youtube.channels().list(id=self.__channel_id, part='snippet,statistics').execute()
         print(channel)
 
     @classmethod
