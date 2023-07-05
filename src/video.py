@@ -14,11 +14,11 @@ class Video(Channel):
         return f"{self.title}"
 
     @property
-    def channel_id(self):
+    def id_video(self):
         return self.__id_video
 
 class PLVideo(Video):
-    def __init__(self, id_video, id_playlist):
+    def __init__(self, id_video: object, id_playlist: object) -> object:
         super().__init__(id_video)
         self.id_playlist = id_playlist
         self.get_service().playlistItems().list(playlistId=id_playlist, part='contentDetails', maxResults=20).execute()
